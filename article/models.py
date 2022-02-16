@@ -1,4 +1,5 @@
 from django.db import models
+from user_profile.models import User
 
 
 class Article(models.Model):
@@ -9,4 +10,10 @@ class Article(models.Model):
 
 
 class CartModel(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(CartModel, on_delete=models.CASCADE)
+    item = models.ForeignKey(Article, on_delete=models.CASCADE)
+    amount = models.IntegerField()

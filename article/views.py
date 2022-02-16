@@ -1,19 +1,9 @@
 from .models import Article
 from rest_framework import serializers
 from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
-class AdminCheck:
-    def __init__(self, other_class):
-        self.other_class = other_class
-
-    def check_admin(self, user):
-        return user.is_superuser
-
-    check_admin(other_class)
-
-
-# @user_passes_test(check_admin)
 class ArticleSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(max_length=255)
     short_description = serializers.CharField(max_length=510)
@@ -37,4 +27,5 @@ class ViewAllArticles(ListAPIView):
 
 
 class CreateArticle(CreateAPIView):
+    permission_classes = (IsAdminUser,)
     serializer_class = ArticleSerializer
