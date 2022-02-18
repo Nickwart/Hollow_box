@@ -1,5 +1,5 @@
 from django.db import models
-from user_profile.models import User
+from user_profile.models import ShopUser
 
 
 class Article(models.Model):
@@ -10,7 +10,7 @@ class Article(models.Model):
 
 
 class CartModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(ShopUser, on_delete=models.CASCADE)
 
 
 class CartItem(models.Model):
