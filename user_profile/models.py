@@ -37,5 +37,7 @@ class ShopUser(AbstractUser, PermissionsMixin):
 
     class Meta:
         permissions = (
-            ("admin", "staff", "default_user")
+            ('admin', 'admin'),
+            ('staff', 'staff'),
+            ('default_user', 'default user')
         )

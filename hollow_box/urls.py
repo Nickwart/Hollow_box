@@ -26,7 +26,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/all', ViewAllArticles.as_view()),
-    path('shop/<int:id>', ViewArticle.as_view()),
+    path('shop/id<int:id>', ViewArticle.as_view()),
     path('moderator/crestearticle', CreateArticle.as_view()),
     path('moderator/createuser', CreateUser.as_view()),
     path('moderator/allusers', ListUsers.as_view()),
