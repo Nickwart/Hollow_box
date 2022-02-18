@@ -1,9 +1,9 @@
 from django.test import TestCase, RequestFactory
-from article.views import CreateArticle, ViewArticle
+from article.views import CreateArticle, ViewArticle, ViewAllArticles
 from article.models import Article
 
 
-class ArticleTestCase(TestCase):
+class OneArticleTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.article1 = Article.objects.create(
@@ -23,3 +23,33 @@ class ArticleTestCase(TestCase):
         request = self.factory.get('/shop/<int:id>')
         response = ViewArticle.as_view()(request, id=self.article1.id)
         self.assertEqual(response.status_code, 200)
+
+
+class AllArticlesTestCase(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_all_articles_view(self):
+        request = self.factory.get('shop/all')
+        response = ViewAllArticles.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+
+
+# class CreateArticleTest(TestCase):
+#     def setUp(self):
+#         self.factory = RequestFactory()
+#
+#     def test_of_article_creation(self):
+#         pass
+#         # test login first. need admin permissions to create articles
+#         article_data = {
+#             "product_name": "Sony DualSense",
+#             "short_description": "Nice phone, low price",
+#             "full_description": "2016 year of fub, Apple A12 processor, 13Mp camera",
+#             "price": 250,
+#         }
+#         request = self.factory.post('moderator/crestearticle')
+#         response = CreateArticle.as_view()(request, article_data)
+#         print(response.data)
+#         self.assertEqual(response.data, article_data)
+
